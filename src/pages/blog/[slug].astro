@@ -1,0 +1,228 @@
+---
+import { getCollection } from "astro:content";
+import MainLayout from "@/layouts/main-layout.astro";
+import FormattedDate from "@/components/formatted-date.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<MainLayout title={post.data.title} description={post.data.description}>
+  <div class="page-wrapper light-blue">
+    <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
+      <div class="w-layout-blockcontainer container-25 w-container">
+        <a href="/" class="brand w-nav-brand">
+          <div class="div-block-10 _100"><img src="/images/Picture1.png" loading="lazy" alt="" class="image-70"></div>
+        </a>
+        <div class="div-block-1450">
+          <a href="https://app.theunivation.com/login" target="_blank" class="brix---social-icon-square-30px login w-inline-block">
+            <div class="text-block-30">Log in</div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="card-no-active-2 custom _1 w-clearfix">
+      <div class="div-block-9"></div>
+      <header class="header">
+        <div class="container-5 w-container">
+          <div class="h1 k">
+            <h1 class="heading-4 _20 black _34">{post.data.title}</h1>
+          </div>
+          <div class="partners-div-2">
+            <!-- Add partner logos here if needed -->
+          </div>
+        </div>
+        <div class="text-2 black _16">
+          <FormattedDate date={post.data.pubDate} />
+        </div>
+        {post.data.image && (
+          <img loading="lazy" alt={post.data.title} src={post.data.image} class="image-104 blog">
+        )}
+        {post.data.videoUrl && (
+          <div class="div-block-1406">
+            <div class="htmlvideo w-embed w-iframe">
+              <div style="position: relative; padding-bottom: 55.3125%; height: 0;">
+                <iframe src={post.data.videoUrl} frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+              </div>
+            </div>
+          </div>
+        )}
+      </header>
+      <div class="content-platform-blog">
+        <div class="black-rich w-richtext">
+          <Content />
+        </div>
+      </div>
+      <div class="link-block-21">
+        <div class="author">
+          {post.data.authorImage && (
+            <img loading="lazy" width="150" height="150" alt={post.data.author} src={post.data.authorImage} class="image-89">
+          )}
+          <div class="text-2 black _16 dodger-blue _0left _0">{post.data.author}</div>
+        </div>
+        <div class="text-2 black _16 dodger-blue _0left light middle">{post.data.authorBio}</div>
+      </div>
+      {post.data.ctaLink && (
+        <a href={post.data.ctaLink} target="_blank" class="register-button pc-menu cta techcity bn small blue center w-button">
+          {post.data.ctaText || "APPLY"}
+        </a>
+      )}
+    </div>
+    <section class="_40px"></section>
+    <div class="card-no-active-2 custom _1 _2rem news">
+      <h1 class="hub-header-title break smaller form-text">Sign Up for Newsletter</h1>
+      <h1 class="hub-header-title break smaller form-text description-text _10">Get the latest Univation Posts and Programs in your inbox.</h1>
+      <div class="form-block-4 w-form">
+        <form id="newsletter" name="email-form" data-name="Email Form" method="post" class="form-4 horizontal w-clearfix">
+          <div class="w-layout-blockcontainer container-24 w-container">
+            <label for="firstnameInput" class="field-label-2">Email Address</label>
+            <input class="purple-input _0down w-input" maxlength="256" name="email" data-name="Email" placeholder="" type="email" id="firstnameInput" required="">
+          </div>
+          <div class="w-layout-blockcontainer container-23 w-container">
+            <label for="Email" class="field-label-2">First Name</label>
+            <input class="purple-input _0down w-input" maxlength="256" name="name" data-name="Name" placeholder="" type="text" id="Email" required="">
+          </div>
+          <button type="submit" class="register-button pc-menu cta techcity bn form black _0 w-button">Sign Up</button>
+        </form>
+      </div>
+    </div>
+    <h1 class="hub-header-title _46">More Blog</h1>
+    <section class="_40px"></section>
+    <!-- Add related blog posts here -->
+    <div class="univation-new-footer">
+      <!-- Add footer content here -->
+    </div>
+  </div>
+</MainLayout>
+
+<style is:global>
+  .bodyhome {
+    background-color: #f5f8ff;
+    font-family: Poppins, sans-serif;
+  }
+  .page-wrapper.light-blue {
+    background-color: #f5f8ff;
+  }
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #fff;
+  }
+  .card-no-active-2.custom._1 {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .header {
+    margin-bottom: 40px;
+  }
+  .heading-4._20.black._34 {
+    font-size: 34px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    font-weight: 700;
+    color: #333;
+  }
+  .text-2.black._16 {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  .image-104.blog {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    margin-bottom: 40px;
+    border-radius: 5px;
+  }
+  .content-platform-blog {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  .black-rich.w-richtext {
+    color: #333;
+  }
+  .link-block-21 {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+  }
+  .author {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .image-89 {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  .text-2.black._16.dodger-blue._0left._0 {
+    font-weight: 600;
+    color: #007bff;
+  }
+  .text-2.black._16.dodger-blue._0left.light.middle {
+    color: #666;
+    font-size: 14px;
+  }
+  .register-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  .register-button:hover {
+    background-color: #0056b3;
+  }
+  ._40px {
+    height: 40px;
+  }
+  .hub-header-title.break.smaller.form-text {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  .form-block-4 {
+    margin-top: 20px;
+  }
+  .form-4.horizontal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .container-24, .container-23 {
+    flex: 1;
+    margin: 0 10px;
+  }
+  .field-label-2 {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+  .purple-input._0down {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  .univation-new-footer {
+    background-color: #f5f8ff;
+    padding: 40px 0;
+  }
+</style>
