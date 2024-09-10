@@ -1,0 +1,30 @@
+---
+import UnivationLayout from "@/layouts/univation-layout.astro";
+import UnivationHeader from "@/components/layout/univation-header.astro";
+import UnivationFooter from "@/components/layout/univation-footer.astro";
+import UnivationUniversityCards from "@/components/sections/univation-university-cards.astro";
+---
+
+<UnivationLayout title="Universities">
+  <UnivationHeader />
+  
+  <main>
+    <h1 class="h1_univation">Universities</h1>
+    <UnivationUniversityCards />
+  </main>
+
+  <UnivationFooter />
+</UnivationLayout>
+
+<style>
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .h1_univation {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+</style>

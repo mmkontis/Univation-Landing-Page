@@ -7,11 +7,9 @@ import { Image } from "astro:assets";
 interface Props {
   reverse?: boolean;
   data: InfoLdg;
-  variant?: "default" | "original";
-  shadowColor?: string; // New prop for custom shadow color
 }
 
-const { reverse, data, variant = "default", shadowColor = "#ffff" } = Astro.props;
+const { reverse, data } = Astro.props;
 ---
 
 <div class="py-16 sm:py-20">
@@ -20,37 +18,25 @@ const { reverse, data, variant = "default", shadowColor = "#ffff" } = Astro.prop
   >
     <div class={cn(reverse ? "lg:order-2" : "lg:order-1")}>
       <h1
-        class={cn(
-          "font-heading text-3xl md:text-4xl lg:text-[40px] h1_univation",
-          variant === "default" ? "text-white" : "text-foreground"
-        )}
+        class="font-heading text-3xl text-foreground md:text-4xl lg:text-[40px] h1_univation"
       >
         {data.title}
       </h1>
-      <p class={cn(
-        "mt-6 text-lg",
-        variant === "default" ? "text-white" : "text-muted-foreground"
-      )}>
+      <p class="mt-6 text-lg text-muted-foreground">
         {data.description}
       </p>
       {data.list && data.list.length > 0 && (
         <dl class="mt-6 space-y-4 leading-7">
           {data.list.map((item) => (
             <div class="relative pl-8">
-              <dt class={cn(
-                "font-semibold h2_univation",
-                variant === "default" ? "text-white" : ""
-              )}>
+              <dt class="font-semibold h2_univation">
                 <Icon
                   name={item.icon}
                   class="absolute left-0 top-1 size-5 stroke-purple-700"
                 />
                 <span>{item.title}</span>
               </dt>
-              <dd class={cn(
-                "text-sm",
-                variant === "default" ? "text-white" : "text-muted-foreground"
-              )}>
+              <dd class="text-sm text-muted-foreground">
                 {item.description}
               </dd>
             </div>
@@ -60,17 +46,13 @@ const { reverse, data, variant = "default", shadowColor = "#ffff" } = Astro.prop
     </div>
     <div
       class={cn(
-        "rounded-xl overflow-visible lg:-m-4 relative",
+        "rounded-xl overflow-hidden border lg:-m-4",
         reverse ? "order-1" : "order-2"
       )}
     >
-      <div 
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 opacity-30 blur-[30px] rounded-full"
-        style={`background-color: ${shadowColor};`}
-      ></div>
-      <div class="relative z-10 p-4">
+      <div class="relative aspect-video">
         <Image
-          class="w-full h-auto max-h-[300px] object-contain drop-shadow-lg"
+          class="size-full object-cover object-center"
           src={data.image}
           alt={data.title}
           width={1000}

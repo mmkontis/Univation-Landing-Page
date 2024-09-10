@@ -1,0 +1,173 @@
+---
+interface Props {
+  variant: 'circle' | 'transparent';
+  imageSrc: string;
+  name: string;
+  role: string;
+  bio: string;
+  linkedinUrl: string;
+  bookSpeakerUrl: string;
+  readBioUrl: string;
+}
+
+const { variant, imageSrc, name, role, bio, linkedinUrl, bookSpeakerUrl, readBioUrl } = Astro.props;
+---
+
+<section class="section-hub-header _80up univation-blue-background overlay">
+  <div class="div-block-89">
+    <div class="univation-mentor-hero">
+      <div class="mentor-info">
+        <h1 class="hub-header-title">{name}</h1>
+        <div class="role-container">
+          <h2 class="sub-header-title">{role}</h2>
+          <a href={linkedinUrl} target="_blank" class="linkedin-link" aria-label="LinkedIn Profile">
+            <img src="https://cdn.prod.website-files.com/60a534859a46c9fab33d2c1f/65b83b18fc1dcbcde2dbef9c_linkedin-app-white-icon.svg" width="24" height="24" alt="LinkedIn" />
+          </a>
+        </div>
+        <p class="h2_univation_subheader">{bio}</p>
+        <div class="awards">
+          <img src="https://cdn.prod.website-files.com/60a534859a46c9fab33d2c1f/65adc73e72005db1d8393b13_30Under30Logo-Black-1.svg" alt="Forbes 30 under 30" class="award-image" />
+          <h3 class="award-title">Forbes 30 under 30</h3>
+        </div>
+        <div class="button-container">
+          <a href={bookSpeakerUrl} class="register-button">Book Speaker</a>
+          <a href={readBioUrl} target="_blank" class="hub-button ">Read Bio</a>
+          <button class="register-button">Book 1Speaker</button>
+        </div>
+      </div>
+      <div class="mentor-image-container">
+        <img src={imageSrc} alt={name} class={`mentor-image ${variant}`} />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .univation-mentor-hero {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4rem 2rem;
+    color: #fff;
+  }
+
+  .mentor-info {
+    flex: 1;
+    padding-right: 2rem;
+  }
+
+  .role-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .linkedin-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+    margin-left: 1rem;
+  }
+
+  .linkedin-link:hover {
+    background-color: rgba(255,255,255,0.2);
+    transform: rotate(360deg);
+  }
+
+  .awards {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 50px;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(5px);
+    transition: transform 0.3s ease;
+  }
+
+  .awards:hover {
+    transform: scale(1.05);
+  }
+
+  .award-image {
+    width: 50px;
+    margin-right: 1rem;
+  }
+
+  .award-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .button-container {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .mentor-image-container {
+    flex-shrink: 0;
+  }
+
+  .mentor-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  }
+
+  .mentor-image.circle {
+    border-radius: 50%;
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+  }
+
+  .mentor-image.transparent {
+    max-height: 500px;
+  }
+
+  @media screen and (max-width: 991px) {
+    .univation-mentor-hero {
+      flex-direction: column;
+      text-align: center;
+      padding: 3rem 1.5rem;
+    }
+
+    .mentor-info {
+      padding-right: 0;
+      margin-bottom: 2rem;
+    }
+
+    .role-container {
+      justify-content: center;
+    }
+
+    .mentor-image-container {
+      margin-top: 2rem;
+    }
+
+    .mentor-image.circle {
+      width: 300px;
+      height: 300px;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .button-container {
+      flex-direction: column;
+    }
+
+    .register-button,
+    .hub-button {
+      width: 100%;
+    }
+  }
+</style>

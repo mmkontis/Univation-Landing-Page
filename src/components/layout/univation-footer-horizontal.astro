@@ -1,0 +1,152 @@
+---
+interface Props {
+  blackContent?: boolean;
+}
+
+const { blackContent = false } = Astro.props;
+---
+
+<footer class:list={["univation-footer", { "black-content": blackContent }]}>
+  <div class="univation-footer-content">
+    <div class="footer-grid">
+      <a href="/" class="footer-logo-link">
+        <img src="/images/logos/univation-white-logo.svg" alt="Univation logo" class="footer-logo">
+      </a>
+      <nav class="footer-nav">
+        <ul class="footer-nav-list">
+          <li><a href="/universities" class="footer-link">Universities</a></li>
+          <li><a href="/companies" class="footer-link">Companies</a></li>
+          <li><a href="/governments" class="footer-link">Governments</a></li>
+          <li><a href="/jobs" class="footer-link">Jobs</a></li>
+          <li><a href="/blog" class="footer-link">Blog</a></li>
+          <li><a href="/contact" class="footer-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="footer-social">
+        <a href="https://facebook.com/" target="_blank" class="social-icon-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="social-icon"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/theunivation/" target="_blank" class="social-icon-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="social-icon"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@univation5990" target="_blank" class="social-icon-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="social-icon"><path d="M23 7c-.3-1.2-1.2-2.1-2.3-2.4C19.1 4 12 4 12 4s-7.1 0-8.7.6C2.2 4.9 1.3 5.8 1 7 .6 8.9.6 12 .6 12s0 3.1.4 5c.3 1.2 1.2 2.1 2.3 2.4 1.6.6 8.7.6 8.7.6s7.1 0 8.7-.6c1.1-.3 2-1.2 2.3-2.4.4-1.9.4-5 .4-5s0-3.1-.4-5zM9.6 15.4V8.6l5.8 3.4-5.8 3.4z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/theunivation/" target="_blank" class="social-icon-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="social-icon"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-copyright">© 2024 Univation</div>
+  </div>
+</footer>
+
+<style>
+  .univation-footer {
+    background: linear-gradient(to bottom, 
+      rgba(255,255,255,0) 0%,
+      rgba(0,123,255,0.1) 25%,
+      rgba(0,123,255,0.2) 50%,
+      rgba(0,123,255,0.1) 75%,
+      rgba(255,255,255,0) 100%
+    );
+    padding: 40px 0;
+    color: white;
+  }
+
+  .univation-footer-content {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .footer-logo {
+    width: 150px;
+  }
+
+  .footer-nav-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-link {
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .footer-link:hover {
+    opacity: 0.8;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 15px;
+  }
+
+  .social-icon-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.2s;
+  }
+
+  .social-icon-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .social-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .footer-copyright {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+
+  .black-content {
+    color: black;
+  }
+
+  .black-content .footer-link,
+  .black-content .social-icon {
+    color: black;
+  }
+
+  .black-content .social-icon-link {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .black-content .social-icon-link:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .footer-nav-list {
+      justify-content: center;
+    }
+  }
+</style>

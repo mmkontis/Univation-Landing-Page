@@ -3,18 +3,36 @@ import BlogHeader from "@/components/blog-header.astro";
 import BlogCard from "@/components/cards/blog-card.astro";
 import MainLayout from "@/layouts/main-layout.astro";
 import { getPosts } from "@/lib/fetchers";
+import UnivationLayout from "@/layouts/univation-layout.astro";
+import UnivationFooter from "@/components/layout/univation-footer.astro";
+import UnivationHeader from "@/components/layout/univation-header.astro";
 
 const posts = await getPosts();
 ---
 
-<MainLayout title="Static Blog">
-  <section class="container py-10">
-    <BlogHeader title="Blog" />
+<UnivationLayout  title="Static Blog" >
+
+  <div class="  univation-blue-background ">
+      <UnivationHeader />
+    <h1 class="h1_univation">Blog</h1>
+
+        <div class="rounded-background  py-8 px-4 sm:px-6 lg:px-8">
+
+    <BlogHeader showSearch={false} title="" />
 
     <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-9 md:gap-y-11 lg:gap-y-16 lg:gap-x-8"
+      class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-9 md:gap-y-11 lg:gap-y-16 lg:gap-x-8"
     >
-      {posts.map((post) => <BlogCard {...post} />)}
+      {posts.map((post) => <BlogCard {...post} class="blog-card-custom" />)}
     </div>
-  </section>
-</MainLayout>
+  </div>
+</UnivationLayout>
+
+<style>
+  .blog-card-custom :global(h2 a) {
+    color: white !important;
+  }
+  .blog-card-custom :global(time) {
+    color: #d1d5db !important; /* Light gray color for date */
+  }
+</style>

@@ -1,0 +1,45 @@
+---
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+---
+
+<div class="rounded-background">
+  <h1 class="h1_univation">Stay Updated</h1>
+  <p class="h1_univation_subheader">Subscribe to our newsletter for the latest innovations and opportunities.</p>
+  <form class="newsletter-form">
+    <Input type="email" placeholder="Enter your email" required class="newsletter-input" />
+    <Button type="submit" variant="secondary" class="newsletter-button">Subscribe</Button>
+  </form>
+</div>
+
+<style is:global>
+  .newsletter-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .newsletter-input {
+    width: 300px !important;
+    margin-right: 10px !important;
+    border-radius: 25px !important;
+    background-color: rgba(255, 255, 255, 0.35) !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    color: #000 !important;
+  }
+  .newsletter-input::placeholder {
+    color: rgba(0, 0, 0, 0.7) !important;
+  }
+  .newsletter-button {
+    background-color: rgba(255, 255, 255, 0.35) !important;
+    color: #000 !important;
+    border-radius: 25px !important;
+    padding: 10px 20px !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s ease !important;
+  }
+  .newsletter-button:hover {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+  }
+</style>

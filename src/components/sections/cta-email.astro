@@ -1,0 +1,80 @@
+---
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+
+interface Props {
+  title: string;
+  description: string;
+  buttonText: string;
+  buttonLink: string;
+}
+
+const { title, description, buttonText, buttonLink } = Astro.props;
+---
+
+<section class="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-transparent">
+  <div class="container px-4 md:px-6">
+    <div class="bg-white bg-opacity-80 backdrop-blur-sm rounded-lg shadow-lg p-8 md:p-12">
+      <div class="grid gap-6 items-center">
+        <div class="flex flex-col justify-center space-y-4 text-center">
+          <div class="space-y-2">
+            <h1 class="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none bg-clip-text text-transparent bg-gradient-to-r from-black to-gray-500">
+              {title}
+            </h1>
+            <p class="max-w-[600px] text-gray-700 md:text-xl mx-auto">
+              {description}
+            </p>
+          </div>
+          <div class="w-full max-w-sm space-y-2 mx-auto">
+            <form class="flex flex-col space-y-2" id="ctaForm">
+              <Input
+                class="w-full bg-white text-black border-gray-300"
+                placeholder="Enter your email"
+                type="email"
+                id="emailInput"
+                required
+              />
+              <div id="phoneInputContainer" class="hidden">
+                <Input
+                  class="w-full bg-white text-black border-gray-300"
+                  placeholder="Enter your phone number"
+                  type="tel"
+                  id="phoneInput"
+                />
+              </div>
+              <Button class="w-full bg-blue-600 text-white hover:bg-blue-700" type="submit">
+                {buttonText}
+              </Button>
+            </form>
+            <p class="text-xs text-gray-600">
+              Get ready to redefine your news distribution experience.
+              <a class="underline underline-offset-2 text-blue-600" href="#">
+                Terms & Conditions
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const emailInput = document.getElementById('emailInput');
+  const phoneInputContainer = document.getElementById('phoneInputContainer');
+  const form = document.getElementById('ctaForm');
+
+  emailInput.addEventListener('blur', () => {
+    if (emailInput.value && emailInput.checkValidity()) {
+      phoneInputContainer.classList.remove('hidden');
+    } else {
+      phoneInputContainer.classList.add('hidden');
+    }
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Handle form submission here
+    console.log('Form submitted');
+  });
+</script>

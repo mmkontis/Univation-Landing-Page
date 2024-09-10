@@ -1,0 +1,136 @@
+---
+interface Props {
+  name: string;
+  location: string;
+  logoUrl: string;
+  slug: string;
+}
+
+const { name, location, logoUrl, slug } = Astro.props;
+---
+
+<div role="listitem" class="university-card card-shadow">
+  <a href={`/university/${slug}`} class="university-card-link">
+    <img 
+      width="50" 
+      height="50" 
+      src={logoUrl} 
+      loading="lazy" 
+      alt={`${name} logo`} 
+      class="university-logo bw-filter logo-shadow"
+    />
+    <div class="university-info">
+      <h1 class="university-name heading-13 colorfull speakers-headline _3-items">{name}</h1>
+      <h3 class="university-location">{location}</h3>
+    </div>
+  </a>
+</div>
+
+<style>
+  :root {
+    --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  .university-card {
+    width: 349px;
+    max-width: 349px;
+    height: 70px;
+    margin: 0;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid #e1e1e1;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #ffffff;
+    font-family: var(--font-family);
+    font-size: 16px;
+    line-height: 24px;
+    -webkit-text-size-adjust: 100%;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .university-card:hover {
+    background-color: #fafafa;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Remove .card-shadow class and its hover effect */
+
+  .university-card-link {
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    color: #000;
+  }
+
+  .university-logo {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    object-fit: cover;
+    border-radius: 50px;
+  }
+
+  .logo-shadow {
+    box-shadow: 3px 3px 20px #0000001c;
+  }
+
+  .bw-filter {
+    filter: grayscale(100%);
+  }
+
+  .university-info {
+    flex: 1;
+  }
+
+  .university-name {
+    color: #000;
+    text-align: left;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    -webkit-text-fill-color: inherit;
+    cursor: pointer;
+    background-image: none;
+    background-clip: border-box;
+    height: auto;
+    max-height: 30px; /* Added max-height */
+    margin-bottom: 5px;
+    padding-top: 0;
+    font-size: 13px;
+    line-height: 16px;
+    position: static;
+    font-family: var(--font-family);
+    font-weight: 700;
+    overflow: hidden; /* Added to handle overflow */
+  }
+
+  .university-location {
+    color: #797b7e;
+    margin: 0;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: var(--font-family);
+  }
+
+  @media screen and (min-width: 1280px) {
+    .university-card {
+      width: auto;
+    }
+  }
+
+  * {
+    scroll-behavior: auto !important;
+    box-sizing: border-box;
+  }
+</style>

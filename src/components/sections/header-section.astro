@@ -3,23 +3,16 @@ interface Props {
   label?: string;
   title: string;
   subtitle?: string;
+  titleClass?: string;
+  labelClass?: string;
+  subtitleClass?: string;
 }
 
-const { label, title, subtitle } = Astro.props;
+const { label, title, subtitle, titleClass = "", labelClass = "", subtitleClass = "" } = Astro.props;
 ---
 
 <div class="flex flex-col items-center text-center">
-  {
-    label ? (
-      <div class="text-gradient_indigo-purple mb-4 font-semibold">{label}</div>
-    ) : null
-  }
-  <h2 class="font-heading text-3xl md:text-4xl lg:text-[40px]">
-    {title}
-  </h2>
-  {
-    subtitle ? (
-      <p class="mt-6 text-balance text-lg text-muted-foreground">{subtitle}</p>
-    ) : null
-  }
+  {label && <p class={`text-sm font-semibold uppercase tracking-wide text-primary ${labelClass}`}>{label}</p>}
+  <h2 class={`mt-2 text-3xl font-bold tracking-tight sm:text-4xl ${titleClass}`}>{title}</h2>
+  {subtitle && <p class={`mt-3 text-xl text-muted-foreground ${subtitleClass}`}>{subtitle}</p>}
 </div>

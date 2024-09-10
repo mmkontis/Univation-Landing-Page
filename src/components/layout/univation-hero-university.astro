@@ -1,0 +1,14 @@
+<div class="section-hub-header _80up univation-blue-background">
+  <div class="div-block-89">
+    <h1 class="h1_univation">{{ universityName }}</h1>
+    <a href="#programs" class="tag-trans-white"><span class="program-count">{{ programCount }}</span> Programs</a>
+    <h1 class="h1_univation_subheader">{{ universityTagline }}</h1>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const programCounter = document.querySelectorAll('.university-programs').length;
+    document.querySelector('.program-count').textContent = programCounter;
+  });
+</script>

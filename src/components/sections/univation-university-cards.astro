@@ -1,0 +1,112 @@
+---
+import UnivationUniversityCard from "@/components/cards/univation-university-card.astro";
+import { slugify } from "@/utils/slugify";
+import { getUniversitiesByCountry, getLogoUrl } from "@/utils/universityRouter";
+
+// Define available countries
+const countries = ["Greece", "Germany", "United States", "Australia"];
+
+// Fetch initial universities (Greece)
+const initialUniversities = await getUniversitiesByCountry("Greece");
+---
+
+<div class="rounded-background">
+  <h2 class="h1_univation" id="countryTitle">Greek Universities</h2>
+
+  <div class="tabs-menu">
+    {countries.map((country) => (
+      <button class={`tag-white ${country === 'Greece' ? 'active' : ''}`} data-country={country}>
+        {country}
+      </button>
+    ))}
+  </div>
+
+  <div id="universityGrid" class="university-grid">
+    {initialUniversities.map((uni) => (
+      <UnivationUniversityCard
+        name={uni.name}
+        location={uni["state-province"] || "Greece"}
+        logoUrl={getLogoUrl(uni.domains[0])}
+        slug={slugify(uni.name)}
+      />
+    ))}
+  </div>
+</div>
+
+<script>
+  import { getUniversitiesByCountry, getLogoUrl } from "@/utils/universityRouter";
+  import { slugify } from "@/utils/slugify";
+
+  const countryTitle = document.getElementById('countryTitle');
+  const universityGrid = document.getElementById('universityGrid');
+  const countryTags = document.querySelectorAll('.tag-white');
+
+  async function selectCountry(country) {
+    countryTitle.textContent = `${country} Universities`;
+    const universities = await getUniversitiesByCountry(country);
+    
+    universityGrid.innerHTML = universities.map(uni => `
+      <div role="listitem" class="university-card card-shadow">
+        <a href="/university/${slugify(uni.name)}" class="university-card-link">
+          <img 
+            width="50" 
+            height="50" 
+            src="${getLogoUrl(uni.domains[0])}" 
+            loading="lazy" 
+            alt="${uni.name} logo" 
+            class="university-logo bw-filter logo-shadow"
+          />
+          <div class="university-info">
+            <h1 class="university-name heading-13 colorfull speakers-headline _3-items">${uni.name}</h1>
+            <h3 class="university-location">${uni["state-province"] || country}</h3>
+          </div>
+        </a>
+      </div>
+    `).join('');
+    
+    countryTags.forEach(tag => {
+      tag.classList.toggle('active', tag.dataset.country === country);
+    });
+  }
+
+  countryTags.forEach(tag => {
+    tag.addEventListener('click', () => selectCountry(tag.dataset.country));
+  });
+
+  // Remove the custom element definition
+  // customElements.define('univation-university-card', UnivationUniversityCard);
+</script>
+
+<style>
+  
+
+  .university-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 0fr));
+    gap: 10px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    justify-content: center;
+  }
+
+  .tabs-menu {
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  @media screen and (max-width: 767px) {
+    .rounded-background {
+      padding: 40px 20px;
+    }
+
+   
+  }
+</style>

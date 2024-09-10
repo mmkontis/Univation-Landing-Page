@@ -1,0 +1,76 @@
+---
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+
+interface Props {
+  universityName: string;
+}
+
+const { universityName } = Astro.props;
+---
+
+<div class="bg-white bg-opacity-80 backdrop-blur-sm rounded-lg shadow-lg p-8 md:p-12 mt-8">
+  <div class="grid gap-6 items-center">
+    <div class="flex flex-col justify-center space-y-4 text-center">
+      <div class="space-y-2">
+        <h2 class="text-2xl font-bold tracking-tighter sm:text-3xl text-gray-900">
+          Become a Mentor at {universityName}
+        </h2>
+        <p class="max-w-[600px] text-gray-700 md:text-lg mx-auto">
+          Share your expertise and help shape the future of education. Join our mentorship program today!
+        </p>
+      </div>
+      <div class="w-full max-w-sm space-y-2 mx-auto">
+        <form class="flex flex-col space-y-2" id="mentorSignupForm">
+          <Input
+            class="w-full bg-white text-black border-gray-300"
+            placeholder="Full Name"
+            type="text"
+            id="nameInput"
+            required
+          />
+          <Input
+            class="w-full bg-white text-black border-gray-300"
+            placeholder="Email Address"
+            type="email"
+            id="emailInput"
+            required
+          />
+          <Input
+            class="w-full bg-white text-black border-gray-300"
+            placeholder="Phone Number"
+            type="tel"
+            id="phoneInput"
+          />
+          <Input
+            class="w-full bg-white text-black border-gray-300"
+            placeholder="Area of Expertise"
+            type="text"
+            id="expertiseInput"
+            required
+          />
+          <Button class="w-full bg-blue-600 text-white hover:bg-blue-700" type="submit">
+            Apply as Mentor
+          </Button>
+        </form>
+        <p class="text-xs text-gray-600">
+          By applying, you agree to our 
+          <a class="underline underline-offset-2 text-blue-600" href="#">
+            Mentorship Terms & Conditions
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('mentorSignupForm');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Handle form submission here
+    console.log('Mentor application submitted');
+    // You can add more logic here, such as sending the data to a server
+  });
+</script>

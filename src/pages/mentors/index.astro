@@ -1,0 +1,157 @@
+---
+import UnivationLayout from "@/layouts/univation-layout.astro";
+import UnivationHeader from "@/components/layout/univation-header.astro";
+import UnivationFooter from "@/components/layout/univation-footer.astro";
+
+// Simulated data for mentors (replace with actual data in a real scenario)
+const featuredMentors = [
+  { name: "Dr. Jane Smith", field: "Computer Science", university: "MIT", image: "https://randomuser.me/api/portraits/women/1.jpg" },
+  { name: "Prof. John Doe", field: "Business Administration", university: "Harvard", image: "https://randomuser.me/api/portraits/men/1.jpg" },
+  { name: "Dr. Emily Brown", field: "Engineering", university: "Stanford", image: "https://randomuser.me/api/portraits/women/2.jpg" },
+  // Add more mentors as needed
+];
+
+---
+
+<UnivationLayout title="Mentors - Univation">
+  <main class="mentors-page univation-blue-background overlay">
+    <UnivationHeader />
+    
+    <div class="hero">
+      <h1>Univation Mentors</h1>
+      <p>Connect with experienced mentors from top universities worldwide</p>
+    </div>
+
+    <div class="content-wrapper">
+      <section class="featured-mentors">
+        <h2>Featured Mentors</h2>
+        <div class="mentor-grid">
+          {featuredMentors.map(mentor => (
+            <a href={`/mentors/${mentor.name.toLowerCase().replace(/\s+/g, '-')}`} class="mentor-card">
+              <img src={mentor.image} alt={mentor.name} class="mentor-image" />
+              <div class="mentor-info">
+                <h3 class="mentor-name">{mentor.name}</h3>
+                <p class="mentor-field">{mentor.field}</p>
+                <p class="mentor-university">{mentor.university}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section class="cta-section">
+        <h2>Ready to find your mentor?</h2>
+        <a href="/mentors/search" class="cta-button">Search Mentors</a>
+      </section>
+    </div>
+
+    <UnivationFooter />
+  </main>
+</UnivationLayout>
+
+<style>
+  .mentors-page {
+    min-height: 100vh;
+  }
+
+  .hero {
+    background-color: #0077b6;
+    color: white;
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .featured-mentors h2, .cta-section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .mentor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .mentor-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .mentor-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .mentor-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .mentor-info {
+    padding: 1rem;
+  }
+
+  .mentor-name {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .mentor-field, .mentor-university {
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .cta-section {
+    text-align: center;
+    margin-top: 4rem;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background-color: #0077b6;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+
+  .cta-button:hover {
+    background-color: #023e8a;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 3rem 1rem;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+    }
+
+    .content-wrapper {
+      padding: 1rem;
+    }
+
+    .mentor-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

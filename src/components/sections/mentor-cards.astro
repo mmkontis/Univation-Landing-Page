@@ -1,0 +1,27 @@
+---
+import MentorCard from '../MentorCard';
+
+interface Mentor {
+  name: string;
+  title: string;
+  imageUrl: string;
+}
+
+const mentors: Mentor[] = [
+  { name: "John Doe", title: "Professor of Computer Science", imageUrl: "/path/to/john-doe.jpg" },
+  { name: "Jane Smith", title: "Associate Professor of Physics", imageUrl: "/path/to/jane-smith.jpg" },
+  { name: "Bob Johnson", title: "Lecturer in Mathematics", imageUrl: "/path/to/bob-johnson.jpg" },
+  { name: "Alice Brown", title: "Professor of Chemistry", imageUrl: "/path/to/alice-brown.jpg" },
+  { name: "Charlie Wilson", title: "Assistant Professor of Biology", imageUrl: "/path/to/charlie-wilson.jpg" },
+  { name: "Eva Garcia", title: "Professor of Engineering", imageUrl: "/path/to/eva-garcia.jpg" },
+  // Add more mentors as needed
+];
+---
+
+<div class="w-full">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    {mentors.map((mentor, index) => (
+      <MentorCard client:load variant="v1" {...mentor} />
+    ))}
+  </div>
+</div>

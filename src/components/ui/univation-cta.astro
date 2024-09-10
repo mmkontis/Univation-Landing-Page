@@ -1,0 +1,18 @@
+---
+import "@/styles/globals.css";
+import "@/styles/utilities.css";
+interface Props {
+  title: string;
+  buttonText: string;
+  buttonLink: string;
+}
+
+const { title, buttonText, buttonLink } = Astro.props;
+---
+
+<div class="containerGlass">
+  <h1 class="h2_univation" >{title}</h1>
+  <a href={buttonLink} target="_blank" class="buttonRoundBlue">
+    {buttonText}
+  </a>
+</div>

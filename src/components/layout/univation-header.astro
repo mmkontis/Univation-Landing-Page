@@ -1,0 +1,156 @@
+<header>
+  <div class="container">
+    <a href="/" class="brand">
+      <img src="/images/logos/univation-white-logo.svg" alt="Univation logo" class="logo">
+    </a>
+    <div class="login-container">
+      <a href="https://app.theunivation.com/login" target="_blank" class="button">
+        <span>Log in</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="arrow-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    backdrop-filter: blur(50px);
+    height: 80px;
+    display: flex;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+    position: relative;
+  }
+
+  .menu-icon {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+  }
+
+  .menu-icon span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 3px;
+  }
+
+  .brand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 80px;
+    transition: transform 0.6s ease;
+  }
+
+  .brand:hover {
+    transform: translateX(-50%) scale(0.95);
+  }
+
+  .logo {
+    padding-bottom: 25px;
+    padding-top: 25px;
+    height: 100%;
+    width: auto;
+  }
+
+  .login-container {
+    margin-left: auto;
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .button {
+    background-color: #ffffff4f;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    line-height: 14px;
+    white-space: nowrap;
+  }
+
+  .button span {
+    transition: margin 0.3s ease;
+  }
+
+  .button:hover {
+    transform: scale(0.95);
+    background-color: #ffffff6f;
+  }
+
+  .button:hover span {
+    margin-right: 4px;
+  }
+
+  .arrow-icon {
+    width: 0px ;
+    height: 16px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+
+  .button:hover .arrow-icon {
+    width: 16px;
+    opacity: 1;
+    margin-left: 4px;
+  }
+
+  @media screen and (max-width: 991px) {
+    .container {
+      max-width: 100%;
+      padding: 0 20px;
+    }
+
+    .menu-icon {
+      display: flex;
+    }
+
+    .login-container {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .login-container {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .brand {
+      height: 60px;
+    }
+
+    .logo {
+      padding-bottom: 15px;
+      padding-top: 15px;
+    }
+  }
+</style>

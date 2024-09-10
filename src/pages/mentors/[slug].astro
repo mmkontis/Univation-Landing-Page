@@ -1,0 +1,310 @@
+---
+import UnivationLayout from "@/layouts/univation-layout.astro";
+import UnivationHeader from "@/components/layout/univation-header.astro";
+import UnivationFooter from "@/components/layout/univation-footer.astro";
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: "jane-smith" } },
+    { params: { slug: "john-doe" } },
+    { params: { slug: "emily-brown" } },
+  ];
+}
+
+const { slug } = Astro.params;
+
+const mentorData = {
+  "jane-smith": {
+    name: "Dr. Jane Smith",
+    field: "Computer Science",
+    university: "MIT",
+    image: "https://randomuser.me/api/portraits/women/1.jpg",
+    bio: "Dr. Jane Smith is a renowned expert in Artificial Intelligence and Machine Learning.",
+    expertise: ["Artificial Intelligence", "Machine Learning", "Data Science"],
+    education: [
+      { degree: "Ph.D. in Computer Science", institution: "Stanford University", year: 2010 },
+      { degree: "M.S. in Computer Science", institution: "MIT", year: 2005 },
+    ],
+    publications: [
+      { title: "Advances in Deep Learning for NLP", year: 2020, journal: "AI Review" },
+      { title: "Ethical Considerations in AI", year: 2019, journal: "Tech Ethics Quarterly" },
+    ],
+  },
+  "john-doe": {
+    name: "Prof. John Doe",
+    field: "Business Administration",
+    university: "Harvard",
+    image: "https://randomuser.me/api/portraits/men/1.jpg",
+    bio: "Prof. John Doe is a leading authority in Business Strategy and Entrepreneurship.",
+    expertise: ["Business Strategy", "Entrepreneurship", "Marketing"],
+    education: [
+      { degree: "Ph.D. in Business Administration", institution: "Harvard University", year: 2008 },
+      { degree: "MBA", institution: "Wharton School", year: 2003 },
+    ],
+    publications: [
+      { title: "Disruptive Innovation in the Digital Age", year: 2021, journal: "HBR" },
+      { title: "Sustainable Business Models", year: 2020, journal: "Journal of Business Ethics" },
+    ],
+  },
+  "emily-brown": {
+    name: "Dr. Emily Brown",
+    field: "Engineering",
+    university: "Stanford",
+    image: "https://randomuser.me/api/portraits/women/2.jpg",
+    bio: "Dr. Emily Brown is a pioneering researcher in Sustainable Engineering and Green Technologies.",
+    expertise: ["Sustainable Engineering", "Green Technologies", "Environmental Science"],
+    education: [
+      { degree: "Ph.D. in Environmental Engineering", institution: "Stanford University", year: 2012 },
+      { degree: "M.S. in Civil Engineering", institution: "UC Berkeley", year: 2007 },
+    ],
+    publications: [
+      { title: "Innovations in Sustainable Urban Design", year: 2022, journal: "Sustainability Science" },
+      { title: "Green Technologies for Water Treatment", year: 2021, journal: "Environmental Engineering" },
+    ],
+  },
+};
+
+const mentor = mentorData[slug] || null;
+
+function getRandomBackgroundImage() {
+  const images = [
+    "https://source.unsplash.com/1600x900/?university,lecture",
+    "https://source.unsplash.com/1600x900/?classroom,education",
+    "https://source.unsplash.com/1600x900/?library,study"
+  ];
+  return images[Math.floor(Math.random() * images.length)];
+}
+---
+
+<UnivationLayout title={mentor ? `${mentor.name} - Mentor Profile` : "Mentor Not Found"}>
+  <main class="mentor-profile-page univation-blue-background overlay">
+    <UnivationHeader />
+    
+    {mentor ? (
+      <>
+        <div class="hero" style={`background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${getRandomBackgroundImage()}');`}>
+          <div class="hero-content">
+            <img src={mentor.image} alt={mentor.name} class="mentor-image" />
+            <h1>{mentor.name}</h1>
+            <p>{mentor.field} at {mentor.university}</p>
+          </div>
+        </div>
+        
+        <div class="content-wrapper">
+          <a href="/mentors" class="back-button">← Back to Mentors</a>
+          
+          <div class="mentor-details">
+            <div class="info-card glass-morphism">
+              <h2>About</h2>
+              <p>{mentor.bio}</p>
+            </div>
+            
+            <div class="info-card glass-morphism">
+              <h2>Areas of Expertise</h2>
+              <ul class="tag-list">
+                {mentor.expertise.map(area => <li class="tag">{area}</li>)}
+              </ul>
+            </div>
+            
+            <div class="info-card glass-morphism">
+              <h2>Education</h2>
+              <ul class="education-list">
+                {mentor.education.map(edu => (
+                  <li>
+                    <strong>{edu.degree}</strong>
+                    <br />
+                    {edu.institution}, {edu.year}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            <div class="info-card glass-morphism">
+              <h2>Selected Publications</h2>
+              <ul class="publication-list">
+                {mentor.publications.map(pub => (
+                  <li>
+                    <strong>"{pub.title}"</strong>
+                    <br />
+                    {pub.journal}, {pub.year}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          
+          <div class="cta-container">
+            <a href="#" class="cta-button">Request Mentorship</a>
+            <a href="#" class="cta-button secondary">View Full Profile</a>
+          </div>
+        </div>
+      </>
+    ) : (
+      <div class="content-wrapper">
+        <h1>Mentor Not Found</h1>
+        <p>Sorry, we couldn't find a mentor with the slug: {slug}</p>
+        <a href="/mentors" class="back-button">Back to Mentors</a>
+      </div>
+    )}
+    
+    <UnivationFooter />
+  </main>
+</UnivationLayout>
+
+<style>
+  .mentor-profile-page {
+    min-height: 100vh;
+  }
+
+  .hero {
+    height: 50vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+  }
+
+  .hero-content {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 2rem;
+    border-radius: 10px;
+  }
+
+  .mentor-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid white;
+    margin-bottom: 1rem;
+  }
+
+  .content-wrapper {
+    max-width: 1200px;
+    margin: -50px auto 0;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+
+  .back-button {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #f0f0f0;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  .back-button:hover {
+    background-color: #e0e0e0;
+  }
+
+  .mentor-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .info-card {
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+
+  .info-card h2 {
+    margin-top: 0;
+    color: #0077b6;
+    border-bottom: 2px solid #0077b6;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .glass-morphism {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  }
+
+  .tag-list, .education-list, .publication-list {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    background-color: #48cae4;
+    color: white;
+    padding: 0.3rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+  }
+
+  .education-list li, .publication-list li {
+    margin-bottom: 1rem;
+  }
+
+  .cta-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    gap: 1rem;
+  }
+
+  .cta-button {
+    padding: 0.75rem 1.5rem;
+    background-color: #0077b6;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .cta-button:hover {
+    background-color: #023e8a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .cta-button.secondary {
+    background-color: #48cae4;
+  }
+
+  .cta-button.secondary:hover {
+    background-color: #00b4d8;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      height: 30vh;
+    }
+
+    .content-wrapper {
+      margin-top: -30px;
+      padding: 1rem;
+    }
+
+    .mentor-details {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-container {
+      flex-direction: column;
+    }
+  }
+</style>

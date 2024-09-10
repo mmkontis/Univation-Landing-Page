@@ -4,12 +4,15 @@ import { formatDate } from "@/lib/utils";
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 
-type Props = CollectionEntry<"blog">;
+type Props = CollectionEntry<"blog"> & {
+  variant?: "default" | "alternative";
+};
 
+const { variant = "default" } = Astro.props;
 const post = Astro.props;
 ---
 
-<article class="group space-y-4">
+<article class={`group relative flex flex-col space-y-2 ${variant === "default" ? "rounded-background" : ""}`}>
   <a
     href={`/blog/${post.slug}/`}
     class="flex h-52 group-hover:-translate-y-2 group-hover:shadow-xl transition duration-300"
@@ -45,11 +48,22 @@ const post = Astro.props;
   <div>
     <a href={`/blog/${post.slug}/`} class="group-hover:underline">
       <h2
-        class="font-heading text-xl md:text-2xl leading-snug line-clamp-3"
+        class="text-xl font-semibold tracking-tight text-white"
         transition:name={"title-" + post.slug}
       >
-        {post.data.title}
+        <a href={`/blog/${post.slug}/`}>
+          {post.data.title}
+        </a>
       </h2>
     </a>
   </div>
 </article>
+
+<style>
+  .rounded-background {
+    padding: 60px 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.35);
+  }
+</style>

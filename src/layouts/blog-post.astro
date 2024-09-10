@@ -1,69 +1,131 @@
 ---
+import UnivationHeader from "@/components/layout/univation-header.astro";
+import UnivationFooter from "@/components/layout/univation-footer.astro";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn, formatDate } from "@/lib/utils";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
-import MainLayout from "./main-layout.astro";
+
+// Import global styles and utilities
+import "@/styles/globals.css";
+import "@/styles/utilities.css";
 
 type Props = CollectionEntry<"blog">;
 
-const slug = Astro.props.slug;
-const { title, description, pubDate, updatedDate, cover, category } =
-  Astro.props.data;
+const { slug } = Astro.props;
+const { title, description, pubDate, updatedDate, cover, category, subtitle } = Astro.props.data;
 ---
 
-<MainLayout title={title} description={description}>
-  <div class="relative container max-w-screen-md py-10">
-    <button
-      onclick="history.back()"
-      class={cn(
-        buttonVariants({ variant: "ghost" }),
-        "absolute left-[-200px] top-10 hidden xl:inline-flex text-muted-foreground"
-      )}
-      transition:animate="slide"
-    >
-      <Icon name="lucide:chevron-left" class="mr-2 size-4" />
-      {" "}Back
-    </button>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body class="univation-blue-background overlay">
+    <UnivationHeader />
 
-    <article class="prose dark:prose-invert max-w-none">
-      <a
-        href={`/blog/category/${category}`}
-        transition:name={`badge-cat-${slug}`}
+    <main class="relative">
+      <button
+        onclick="history.back()"
+        class={cn(
+          buttonVariants({ variant: "ghost" }),
+          "absolute left-0 top-0 md:left-8 md:top-0 text-white hover:text-white/80"
+        )}
+        transition:animate="slide"
       >
-        <Badge radius="md" className="capitalize">
-          {category}
-        </Badge>
-      </a>
-      <Image
-        class="rounded-xl overflow-hidden my-6"
-        width={720}
-        height={360}
-        src={cover}
-        alt={title}
-        transition:name={`img-${slug}`}
-      />
-      <div class="flex items-center justify-between">
-        <span
-          class="font-medium text-muted-foreground"
-          transition:name={`date-${slug}`}
-        >
-          {formatDate(pubDate)}
-          {
-            updatedDate && (
-              <span>- Last updated on {formatDate(updatedDate)}</span>
-            )
-          }
-        </span>
+        <Icon name="lucide:chevron-left" class="mr-2 size-4" />
+        Back
+      </button>
+
+      <div class="univation-blog-container">
+        <article class="prose max-w-none">
+          <div class="text-center mb-8">
+            <h1 class="font-heading text-4xl mb-2" transition:name={`title-${slug}`}>
+              {title}
+            </h1>
+            <h2 class="text-xl font-normal text-gray-600 mt-1 mb-4">Carl Sagan's reflection on our planet Earth</h2>
+            <a
+              href={`/blog/category/${category}`}
+              transition:name={`badge-cat-${slug}`}
+            >
+              <Badge radius="md" className="capitalize">
+                {category}
+              </Badge>
+            </a>
+          </div>
+          <Image
+            class="rounded-xl overflow-hidden my-6 w-full"
+            width={944}
+            height={472}
+            src={cover}
+            alt={title}
+            transition:name={`img-${slug}`}
+          />
+          <p>{description}</p>
+          <hr class="my-6" />
+          <div class="text-black">
+            <slot />
+          </div>
+          <div class="flex items-center justify-end mt-6">
+            <span
+              class="font-medium text-muted-foreground"
+              transition:name={`date-${slug}`}
+            >
+              {formatDate(pubDate)}
+              {
+                updatedDate && (
+                  <span> - Last updated on {formatDate(updatedDate)}</span>
+                )
+              }
+            </span>
+          </div>
+        </article>
       </div>
-      <h1 class="font-heading text-4xl my-4" transition:name={`title-${slug}`}>
-        {title}
-      </h1>
-      <p>{description}</p>
-      <hr class="my-6" />
-      <slot />
-    </article>
-  </div>
-</MainLayout>
+    </main>
+
+    <UnivationFooter />
+  </body>
+</html>
+
+<style>
+  .univation-blog-container {
+    border-style: none;
+    width: 944px;
+    margin:  auto;
+    padding: 3rem;
+    box-shadow: 0 0 20px #0000001a;
+    background-color: white;
+    border-radius: 20px;
+    color: black;
+  }
+
+  .prose {
+    --tw-prose-body: theme('colors.black');
+    --tw-prose-headings: theme('colors.black');
+    --tw-prose-lead: theme('colors.black');
+    --tw-prose-links: theme('colors.blue.600');
+    --tw-prose-bold: theme('colors.black');
+    --tw-prose-counters: theme('colors.black');
+    --tw-prose-bullets: theme('colors.black');
+    --tw-prose-hr: theme('colors.gray.300');
+    --tw-prose-quotes: theme('colors.black');
+    --tw-prose-quote-borders: theme('colors.gray.300');
+    --tw-prose-captions: theme('colors.gray.700');
+    --tw-prose-code: theme('colors.black');
+    --tw-prose-pre-code: theme('colors.white');
+    --tw-prose-pre-bg: theme('colors.gray.800');
+    --tw-prose-th-borders: theme('colors.gray.300');
+    --tw-prose-td-borders: theme('colors.gray.200');
+  }
+
+  @media (max-width: 1000px) {
+    .univation-blog-container {
+      width: 90%;
+      padding: 2rem;
+    }
+  }
+</style>

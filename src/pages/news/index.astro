@@ -1,0 +1,247 @@
+---
+import UnivationLayout from "@/layouts/univation-layout.astro";
+import UnivationHeader from "@/components/layout/univation-header.astro";
+import UnivationFooter from "@/components/layout/univation-footer.astro";
+import Testimonials from "@/components/sections/testimonials-univation.astro";
+import { Accordion, AccordionItem } from "@/components/ui/accordion";
+import InfoLanding from "@/components/sections/info-landing.astro";
+import { infos } from "@/config/news";
+import Features from "@/components/sections/features.astro";
+
+const companies = [
+  { name: "Company 1", logo: "/path/to/logo1.png" },
+  { name: "Company 2", logo: "/path/to/logo2.png" },
+  { name: "Company 3", logo: "/path/to/logo3.png" },
+  { name: "Company 4", logo: "/path/to/logo4.png" },
+  { name: "Company 5", logo: "/path/to/logo5.png" },
+  { name: "Company 6", logo: "/path/to/logo6.png" },
+  { name: "Company 7", logo: "/path/to/logo7.png" },
+  { name: "Company 8", logo: "/path/to/logo8.png" },
+  { name: "Company 9", logo: "/path/to/logo9.png" },
+  { name: "Company 10", logo: "/path/to/logo10.png" },
+  { name: "Company 11", logo: "/path/to/logo11.png" },
+  { name: "Company 12", logo: "/path/to/logo12.png" },
+  { name: "Company 13", logo: "/path/to/logo13.png" },
+  { name: "Company 14", logo: "/path/to/logo14.png" },
+  { name: "Company 15", logo: "/path/to/logo15.png" },
+];
+
+const newsOutlets = [
+  { name: "News Outlet 1", logo: "/path/to/news1.png" },
+  { name: "News Outlet 2", logo: "/path/to/news2.png" },
+  { name: "News Outlet 3", logo: "/path/to/news3.png" },
+  { name: "News Outlet 4", logo: "/path/to/news4.png" },
+  { name: "News Outlet 5", logo: "/path/to/news5.png" },
+  { name: "News Outlet 6", logo: "/path/to/news6.png" },
+  { name: "News Outlet 7", logo: "/path/to/news7.png" },
+  { name: "News Outlet 8", logo: "/path/to/news8.png" },
+  { name: "News Outlet 9", logo: "/path/to/news9.png" },
+  { name: "News Outlet 10", logo: "/path/to/news10.png" },
+  { name: "News Outlet 11", logo: "/path/to/news11.png" },
+  { name: "News Outlet 12", logo: "/path/to/news12.png" },
+  { name: "News Outlet 13", logo: "/path/to/news13.png" },
+  { name: "News Outlet 14", logo: "/path/to/news14.png" },
+  { name: "News Outlet 15", logo: "/path/to/news15.png" },
+];
+---
+
+<UnivationLayout title="Landing">
+  <div class="univation-blue-background">
+    <UnivationHeader />
+    
+    <Testimonials />
+      <h2 class="h1_univation mb-20">Used By</h2>
+
+    <!-- Updated "Used by" section with rotated container and items -->
+    <div class="used-by-section">
+      <div class="logo-scroll-container rotated-container" id="companiesContainer">
+        <div class="logo-scroll" id="companiesScroll">
+          {companies.map((company) => (
+            <div class="tag-trans-white logo-container rotated">
+              <img src={company.logo} alt={company.name} class="logo" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="logo-scroll-container rotated-container-15" id="newsOutletsContainer">
+        <div class="logo-scroll" id="newsOutletsScroll">
+          {newsOutlets.map((outlet) => (
+            <div class="tag-trans-white logo-container">
+              <img src={outlet.logo} alt={outlet.name} class="logo" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+<div class="overlay">
+    <section>
+         <div class="container">
+          <h2 class="h1_univation mb-20">How It Works</h2>
+          <div>
+    {infos.map((info, index) => (
+      <InfoLanding 
+        key={index}
+        data={info}
+        reverse={index % 2 !== 0}
+      />
+    ))}
+
+    <div >
+      
+
+    </div>
+        </section>
+
+    <!-- New Custom CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <h2 class="cta-title">Ready to Get Started?</h2>
+        <p class="cta-description">Join thousands of companies leveraging our platform for their news distribution needs.</p>
+        <a href="/signup" class="cta-button">Sign Up Now</a>
+      </div>
+    </section>
+
+    <UnivationFooter />
+</div>
+  </div>
+
+
+  <style>
+    .used-by-section {
+      padding: 32px 0;
+      text-align: center;
+      overflow: visible;
+    }
+
+    .logo-scroll-container {
+      overflow: hidden;
+      padding: 16px 0;
+    }
+
+    .logo-scroll {
+      display: flex;
+      gap: 24px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo-container {
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 0px;
+      width: 160px;  /* Set width to 160px for a 2:1 ratio */
+      height: 80px;  /* Set height to 80px for a 2:1 ratio */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+
+    .logo {
+      max-width: 80px;
+      height: auto;
+      filter: grayscale(100%);
+      opacity: 0.7;
+      transition: all 0.3s ease;
+    }
+
+    .logo-container:hover .logo {
+      filter: grayscale(0%);
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .logo {
+        max-width: 60px;
+      }
+    }
+
+    .rotated {
+      transform: rotate(deg); /* Rotate the logos by 45 degrees */
+    }
+
+    .rotated-container {
+      transform: rotate(-5deg);
+      
+    }
+    .rotated-container-15 {
+      margin-top: -350px;
+      margin-bottom: 200px;
+      transform: rotate(5deg);
+    }
+
+    /* Adjust the container height to accommodate the rotated row */
+    #companiesContainer {
+      height: 300px; /* Adjust this value as needed */
+      overflow: visible;
+    }
+
+    /* Ensure the logos in the rotated row remain visible */
+    #companiesContainer .logo-scroll {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* Custom CTA Styles */
+    .cta-section {
+      background-color: #f0f4f8;
+      padding: 64px 0;
+      text-align: center;
+    }
+
+    .cta-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 16px;
+      color: #1a202c;
+    }
+
+    .cta-description {
+      font-size: 1.25rem;
+      margin-bottom: 32px;
+      color: #4a5568;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: #3182ce;
+      color: white;
+      font-size: 1.125rem;
+      font-weight: bold;
+      padding: 12px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background-color: #2c5282;
+    }
+  </style>
+
+  <script>
+    const companiesScroll = document.getElementById('companiesScroll');
+    const newsOutletsScroll = document.getElementById('newsOutletsScroll');
+    let lastScrollY = window.scrollY;
+
+    function handleScroll() {
+      const scrollY = window.scrollY;
+      const scrollDiff = scrollY - lastScrollY;
+
+      if (companiesScroll && newsOutletsScroll) {
+        const companyTransform = getComputedStyle(companiesScroll).transform;
+        const newsTransform = getComputedStyle(newsOutletsScroll).transform;
+        const companyMatrix = new DOMMatrix(companyTransform);
+        const newsMatrix = new DOMMatrix(newsTransform);
+
+        companiesScroll.style.transform = `translateX(${companyMatrix.m41 - scrollDiff}px)`;
+        newsOutletsScroll.style.transform = `translateX(${newsMatrix.m41 + scrollDiff}px)`;
+      }
+
+      lastScrollY = scrollY;
+    }
+
+    window.addEventListener('scroll', handleScroll);
+  </script>
+</UnivationLayout>

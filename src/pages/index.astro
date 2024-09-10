@@ -1,23 +1,69 @@
 ---
-import ExampleGrid from "@/components/example-grid.astro";
-import PageHeader from "@/components/page-header.astro";
-import { navMenuConfig } from "@/config/nav-menu";
-import MainLayout from "@/layouts/main-layout.astro";
-
-const examples = navMenuConfig.examplesNav[0].items;
-const pages = navMenuConfig.pagesNav[0].items;
+import UnivationLayout from "@/layouts/univation-layout.astro";
+import UnivationHeader from "@/components/layout/univation-header.astro";
+import UnivationHero from "@/components/layout/univation-hero.astro";
+import UnivationCTA from "@/components/ui/univation-cta.astro";
+import UnivationFooter from "@/components/layout/univation-footer.astro";
+import { infos } from "@/config/landing";
+import BentoGrid from "@/components/sections/bentogrid.astro";
+import Features from "@/components/sections/features.astro";
+import HeroLanding from "@/components/sections/hero-landing.astro";
+import InfoLanding from "@/components/sections/info-landing.astro";
+import PreviewLanding from "@/components/sections/preview-landing.astro";
+import Testimonials from "@/components/sections/testimonials.astro";
+import UnivationUniversityCards from "@/components/sections/univation-university-cards.astro";
 ---
 
-<MainLayout title="">
-  <div class="bg-background-200">
-    <section class="container py-12">
-      <PageHeader
-        heading="Discovery"
-        text="Differents pages and examples apps built with Astro v4.5, shadcn/ui & react js. Fully Open Source."
-      />
+<UnivationLayout title="Landing">
+  <div class="univation-blue-background">
+    <UnivationHeader />
+    <UnivationHero />
+    <UnivationUniversityCards />
 
-      <ExampleGrid title="Pages" items={pages} />
-      <ExampleGrid title="Examples Apps" items={examples} />
-    </section>
+    <div class="overlay cente">
+      <h1 class="h1_univation">Featured Posts</h1>
+      <div class="cta-container">
+        <UnivationCTA
+          title="Run your Incubator or Accelerator program Online on our Platform"
+          buttonText="Check the Platform"
+          buttonLink="/platform/home"
+        />
+        <UnivationCTA
+          title="For Universities Incubators and Startup Programs"
+          buttonText="Ask a Partnership"
+          buttonLink="/university-partnerships"
+        />
+        <UnivationCTA
+          title="General Partnerships & Questions"
+          buttonText="Contact Us"
+          buttonLink="/contact"
+        />
+      </div>
+      <UnivationFooter />
+    </div>
+
   </div>
-</MainLayout>
+
+  <style>
+    .center {
+      text-align: center;
+    }
+    .cta-container {
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 680px;
+      gap: 20px; /* Adjust this value to control vertical spacing between CTAs */
+    }
+
+  </style>
+
+
+</UnivationLayout>
+
+<style>
+  /* Add any additional styles here */
+</style>

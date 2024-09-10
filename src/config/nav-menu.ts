@@ -7,7 +7,7 @@ export const navMenuConfig: NavMenuConfig = {
       items: [
         {
           title: "Landing",
-          href: "/landing",
+          href: "/",
           description: "A landing page template with differents sections.",
           image: "/images/examples/landing.jpg",
         },

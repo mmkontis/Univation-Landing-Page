@@ -1,0 +1,82 @@
+---
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+
+export interface Props {
+  variant?: "white" | "black";
+}
+
+const { variant = "white" } = Astro.props;
+
+const containerClass = variant === "black" ? "bg-black" : "bg-white";
+const textClass = variant === "black" ? "text-white" : "text-black";
+const buttonClass = variant === "black" 
+  ? "bg-white text-black font-bold hover:bg-gray-200 transition-colors duration-200 shadow-[0_0_15px_rgba(255,255,255,0.7)]" 
+  : "bg-black text-white hover:bg-gray-800";
+const inputClass = variant === "black" ? "bg-black text-white border-white" : "bg-white text-black border-black";
+const linkClass = variant === "black" ? "text-blue-300" : "text-blue-600";
+---
+
+<div class={`${containerClass} rounded-lg shadow-lg p-6 md:p-8 mt-8 max-w-md mx-auto`}>
+  <div class="grid gap-4 items-center">
+    <div class="flex flex-col justify-center space-y-3 text-center">
+      <div class="space-y-2">
+        <h2 class={`text-xl font-bold tracking-tighter sm:text-2xl ${textClass}`}>
+          Contact Us
+        </h2>
+        <p class={`max-w-[400px] text-sm md:text-base mx-auto ${textClass}`}>
+          Have a question or feedback? We'd love to hear from you. Fill out the form below and we'll get back to you soon.
+        </p>
+      </div>
+      <div class="w-full space-y-2 mx-auto">
+        <form class="flex flex-col space-y-2" id="contactForm">
+          <Input
+            class={`w-full ${inputClass}`}
+            placeholder="Full Name"
+            type="text"
+            id="nameInput"
+            required
+          />
+          <Input
+            class={`w-full ${inputClass}`}
+            placeholder="Email Address"
+            type="email"
+            id="emailInput"
+            required
+          />
+          <!-- Removed subject input -->
+          <textarea
+            class={`w-full p-2 rounded-md ${inputClass}`}
+            placeholder="Your Message"
+            id="messageInput"
+            rows="4"
+            required
+          ></textarea>
+          <Button class={`w-full ${buttonClass}`} type="submit">
+            Send Message
+          </Button>
+        </form>
+        <p class={`text-xs ${textClass}`}>
+          By submitting this form, you agree to our 
+          <a class={`underline underline-offset-2 ${linkClass}`} href="#">
+            Privacy Policy
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contactForm');
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        // Handle form submission here
+        console.log('Contact form submitted');
+        // You can add more logic here, such as sending the data to a server
+      });
+    }
+  });
+</script>

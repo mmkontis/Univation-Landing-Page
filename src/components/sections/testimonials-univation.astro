@@ -1,0 +1,132 @@
+---
+import { testimonials } from "@/config/landing";
+import { Image } from "astro:assets";
+import { Badge } from "@/components/ui/badge";
+import HeaderSection from "./header-section.astro";
+
+const newsOutlets = [
+  { name: "TechCrunch", logo: "/path-to-techcrunch-logo.png" },
+  { name: "Forbes", logo: "/path-to-forbes-logo.png" },
+  { name: "Wired", logo: "/path-to-wired-logo.png" },
+  { name: "The Verge", logo: "/path-to-theverge-logo.png" },
+  { name: "VentureBeat", logo: "/path-to-venturebeat-logo.png" },
+  { name: "CNBC", logo: "/path-to-cnbc-logo.png" },
+  { name: "Bloomberg", logo: "/path-to-bloomberg-logo.png" },
+  { name: "TechRadar", logo: "/path-to-techradar-logo.png" },
+];
+---
+
+
+
+<section>
+  <div class="container flex max-w-7xl flex-col gap-0 py-20 sm:gap-y-12">
+    <h1 class="h1_univation">Create the News</h1>
+    <h1 class="h1_univation_subheader">quoting our experts talking points. From AI & Tech CEOs</h1>
+    
+    <div class="column-1 gap-5 space-y-5 md:columns-2 lg:columns-3 xl:columns-4" id="testimonialContainer">
+      {
+        testimonials.map((item, index) => {
+          return (
+            <div class="break-inside-avoid">
+              <div class={`relative rounded-xl border spark-border`} data-index={index}>
+                <div class="spark-container spark-start-${index % 4}">
+                  <div class="spark"></div>
+                </div>
+                <div class="flex flex-col px-4 py-5 sm:p-6">
+                  {item.status && (
+                    <div class="absolute top-2 right-2">
+                      <Badge variant={item.status === 'published' ? 'default' : item.status === 'private' ? 'secondary' : 'destructive'}>
+                        {item.status}
+                      </Badge>
+                    </div>
+                  )}
+                  <div>
+                    <div class="relative mb-4 flex items-center gap-3">
+                      <span class="relative inline-flex size-10 shrink-0 items-center justify-center rounded-full text-base">
+                        <Image
+                          width={100}
+                          height={100}
+                          class="size-full rounded-full border"
+                          src={item.image}
+                          alt={item.name}
+                        />
+                      </span>
+                      <div>
+                        <p class="text-sm font-semibold text-foreground">
+                          {item.name}
+                        </p>
+                        <p class="text-sm text-muted-foreground">{item.job}</p>
+                      </div>
+                    </div>
+                    <q class="text-muted-foreground">{item.review}</q>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+
+
+<style>
+  .spark-border {
+    position: relative;
+    overflow: visible;
+    --border-radius: 0.75rem;
+    backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, 1);
+    transition: transform 0.3s ease-in-out, z-index 0s;
+    z-index: 1;
+  }
+
+  @keyframes pulseScale {
+    0%, 100% { 
+      transform: scale(1); 
+      z-index: 1;
+    }
+    15%, 80% { 
+      transform: scale(1.2); 
+      z-index: 10;
+    }
+  }
+
+  .pulse-scale {
+    animation: pulseScale 2.5s ease-in-out;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+  }
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
+  }
+  .animate-marquee2 {
+    animation: marquee 40s linear infinite;
+    animation-delay: 20s;
+  }
+</style>
+
+<script>
+  function getRandomCard() {
+    const cards = document.querySelectorAll('#testimonialContainer > div > div');
+    return cards[Math.floor(Math.random() * cards.length)];
+  }
+
+  function pulseRandomCard() {
+    const cards = document.querySelectorAll('#testimonialContainer > div > div');
+    cards.forEach(card => card.style.zIndex = '1');
+
+    const card = getRandomCard();
+    card.classList.add('pulse-scale');
+    setTimeout(() => {
+      card.classList.remove('pulse-scale');
+    }, 2500);
+  }
+
+  setInterval(pulseRandomCard, 6000);
+</script>

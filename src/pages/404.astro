@@ -1,0 +1,81 @@
+---
+import UnivationLayout from "@/layouts/univation-layout.astro";
+import UnivationHeader from "@/components/layout/univation-header.astro";
+import UnivationFooter from "@/components/layout/univation-footer.astro";
+---
+
+<UnivationLayout title="404 - Innovation not   Not Found">
+  <div class="univation-blue-background overlay">
+    <UnivationHeader />
+    
+    <main class="section-hub-header">
+      <div class="div-block-89">
+        <h1 class="h1_univation">404 - Page Not Found</h1>
+        <p class="h1_univation_subheader">Oops! The page you're looking for doesn't exist or has been moved.</p>
+        <button onclick="window.location.href='/';" >Go Home</button>
+        <button onclick="window.location.href='/mentors';">Explore Mentors</button>
+      </div>
+    </main>
+
+    <UnivationFooter />
+  </div>
+</UnivationLayout>
+
+<style>
+  .section-hub-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 20px;
+  }
+
+  .hub-header-title {
+    margin-bottom: 20px;
+  }
+
+  .sub-header-title {
+    margin-bottom: 30px;
+  }
+
+  .hub-button {
+    margin: 10px;
+  }
+
+  @media screen and (max-width: 767px) {
+    .section-hub-header {
+      padding: 80px 20px;
+    }
+
+    .hub-header-title {
+      font-size: 36px;
+    }
+
+    .sub-header-title {
+      font-size: 18px;
+    }
+
+    .hub-button {
+      font-size: 16px;
+    }
+  }
+
+  @media screen and (max-width: 479px) {
+    .section-hub-header {
+      padding: 60px 20px;
+    }
+
+    .hub-header-title {
+      font-size: 28px;
+    }
+
+    .sub-header-title {
+      font-size: 16px;
+    }
+
+    .hub-button {
+      font-size: 14px;
+    }
+  }
+</style>

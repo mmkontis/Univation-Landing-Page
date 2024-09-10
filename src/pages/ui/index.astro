@@ -1,0 +1,121 @@
+---
+import UnivationLayout from "@/layouts/univation-layout.astro";
+import UnivationHeader from "@/components/layout/univation-header.astro";
+import UnivationFooter from "@/components/layout/univation-footer.astro";
+import MentorSignupForm from "@/components/forms/mentor-signup-form.astro";
+import CTAEmail from "@/components/sections/cta-email.astro";
+import { Card } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import ContactForm from "@/components/forms/ContactForm.astro";
+import NewsletterUnivationForm from "@/components/forms/NewsletterUnivationForm.astro";
+import UnivationMentorHero from "@/components/UnivationMentorHero.astro";
+import GreenGradientCircle from "@/components/GreenGradientCircle.astro";
+---
+
+<UnivationLayout title="404 - Innovation not   Not Found">
+  <div class="univation-blue-background">
+    <UnivationHeader />
+    <NewsletterUnivationForm />
+    <GreenGradientCircle />
+    <div class="max-w-[1200px] mx-auto">
+      <MentorSignupForm />
+    </div>
+    <div class="w-fit mx-auto">
+      <MentorSignupForm variant="black"/>
+    </div>
+
+    <UnivationMentorHero
+      variant="circle"
+      imageSrc="https://cdn.prod.website-files.com/60a534859a46c9fab33d2c1f/65adc652af1ae6c21a9909a6_athens_2_-_Copy-removebg-p-500.png"
+      name="Athens AI"
+      role="AI Assistant"
+    />
+
+    <UnivationMentorHero
+      variant="transparent"
+      imageSrc="https://cdn.prod.website-files.com/60a534859a46c9fab33d2c1f/65adc652af1ae6c21a9909a6_athens_2_-_Copy-removebg-p-500.png"
+      name="Athens AI"
+      role="AI Assistant"
+    />
+
+    <CTAEmail />
+
+    <a href="/" class="hub-button">Go Home</a>
+    
+    <main class="">
+      <div class="div-block-89">
+        <h1 class="h1_univation">404 - Page Not Found</h1>
+        <p class="h1_univation_subheader">Oops! The page you're looking for doesn't exist or has been moved.</p>
+        <Button href="/" class="hub-button ">1Go Home</Button>
+                <Button href="/" class="hub-button ">Explore Mentors <span class="inline-block align-middle"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-1"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg></span></Button>
+        <div class="w-full max-w-md mx-auto mt-8">
+          <ContactForm />
+        </div>
+
+      </div>
+    </main>
+
+    <UnivationFooter />
+  </div>
+</UnivationLayout>
+
+<style>
+  .section-hub-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 20px;
+  }
+
+  .hub-header-title {
+    margin-bottom: 20px;
+  }
+
+  .sub-header-title {
+    margin-bottom: 30px;
+  }
+
+  .hub-button {
+    margin: 10px;
+  }
+
+  @media screen and (max-width: 767px) {
+    .section-hub-header {
+      padding: 80px 20px;
+    }
+
+    .hub-header-title {
+      font-size: 36px;
+    }
+
+    .sub-header-title {
+      font-size: 18px;
+    }
+
+    .hub-button {
+      font-size: 16px;
+    }
+  }
+
+  @media screen and (max-width: 479px) {
+    .section-hub-header {
+      padding: 60px 20px;
+    }
+
+    .hub-header-title {
+      font-size: 28px;
+    }
+
+    .sub-header-title {
+      font-size: 16px;
+    }
+
+    .hub-button {
+      font-size: 14px;
+    }
+  }
+</style>

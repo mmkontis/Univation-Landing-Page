@@ -1,0 +1,47 @@
+---
+interface PlanFeature {
+  name: string;
+  included: boolean;
+}
+
+interface PricingPlan {
+  name: string;
+  price: string;
+  features: PlanFeature[];
+  ctaText: string;
+  ctaLink: string;
+}
+
+interface Props {
+  plans: PricingPlan[];
+}
+
+const { plans } = Astro.props;
+---
+
+<section class="py-16 bg-gray-100">
+  <div class="container mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-12">Pricing Plans</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      {plans.map((plan) => (
+        <div class="bg-white rounded-lg shadow-md p-8">
+          <h3 class="text-2xl font-bold mb-4">{plan.name}</h3>
+          <p class="text-4xl font-bold mb-6">{plan.price}</p>
+          <ul class="mb-8">
+            {plan.features.map((feature) => (
+              <li class="flex items-center mb-2">
+                <span class={`mr-2 ${feature.included ? 'text-green-500' : 'text-red-500'}`}>
+                  {feature.included ? '✓' : '✗'}
+                </span>
+                {feature.name}
+              </li>
+            ))}
+          </ul>
+          <a href={plan.ctaLink} class="block w-full text-center bg-purple-700 text-white py-2 rounded-full hover:bg-purple-600 transition-colors">
+            {plan.ctaText}
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
