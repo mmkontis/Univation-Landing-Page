@@ -1,13 +1,26 @@
 ---
+<<<<<<< HEAD
 import ExampleGrid from "@/components/example-grid.astro";
 import PageHeader from "@/components/page-header.astro";
 import { navMenuConfig } from "@/config/nav-menu";
+=======
+import BentoGrid from "@/components/sections/bentogrid.astro";
+import Features from "@/components/sections/features.astro";
+import HeroLanding from "@/components/sections/hero-landing.astro";
+import InfoLanding from "@/components/sections/info-landing.astro";
+import PreviewLanding from "@/components/sections/preview-landing.astro";
+import Testimonials from "@/components/sections/testimonials.astro";
+import UnivationFooter from "@/components/univation_footer.astro";
+
+import { infos } from "@/config/landing";
+>>>>>>> c12203c92f74ff5e68887f07c86194a4fe52e057
 import MainLayout from "@/layouts/main-layout.astro";
 
 const examples = navMenuConfig.examplesNav[0].items;
 const pages = navMenuConfig.pagesNav[0].items;
 ---
 
+<<<<<<< HEAD
 <MainLayout title="">
   <div class="bg-background-200">
     <section class="container py-12">
@@ -20,4 +33,15 @@ const pages = navMenuConfig.pagesNav[0].items;
       <ExampleGrid title="Examples Apps" items={examples} />
     </section>
   </div>
+=======
+<MainLayout title="Landing">
+  <HeroLanding />
+  <PreviewLanding />
+  <BentoGrid />
+  <InfoLanding data={infos[0]} reverse={true} />
+  <!-- <InfoLanding data={infos[1]} /> -->
+  <Features />
+  <Testimonials />
+  <UnivationFooter blackContent={true} />
+>>>>>>> c12203c92f74ff5e68887f07c86194a4fe52e057
 </MainLayout>

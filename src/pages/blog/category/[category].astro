@@ -27,15 +27,13 @@ const { posts } = Astro.props;
 ---
 
 <MainLayout
-  title={`${capitalizer(category)} | Blog`}
+  title={`${capitalizer(category)} | Univation Blog`}
   description={`All posts for ${category} category`}
 >
   <section class="container py-10">
-    <BlogHeader title={`Posts by ${category} category`} />
+    <BlogHeader title={`${capitalizer(category)} Articles`} />
 
-    <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-9 md:gap-y-16 lg:gap-x-8"
-    >
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {posts.map((post) => <BlogCard {...post} />)}
     </div>
   </section>

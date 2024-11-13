@@ -10,6 +10,7 @@ import UnivationHeader from "@/components/layout/univation-header.astro";
 const posts = await getPosts();
 ---
 
+<<<<<<< HEAD
 <UnivationLayout  title="Static Blog" >
 
   <div class="  univation-blue-background ">
@@ -24,6 +25,14 @@ const posts = await getPosts();
       class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-9 md:gap-y-11 lg:gap-y-16 lg:gap-x-8"
     >
       {posts.map((post) => <BlogCard {...post} class="blog-card-custom" />)}
+=======
+<MainLayout title="Univation Blog">
+  <section class="container py-10">
+    <BlogHeader title="Latest Articles" />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {posts.map((post) => <BlogCard {...post} />)}
+>>>>>>> c12203c92f74ff5e68887f07c86194a4fe52e057
     </div>
   </div>
 </UnivationLayout>
