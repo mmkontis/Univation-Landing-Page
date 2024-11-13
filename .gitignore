@@ -21,3 +21,6 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+univation.webflow/
+univationwebflow/
+.vercel

@@ -5,23 +5,46 @@ interface Mentor {
   name: string;
   title: string;
   imageUrl: string;
+  university?: string;
 }
 
-const mentors: Mentor[] = [
-  { name: "John Doe", title: "Professor of Computer Science", imageUrl: "/path/to/john-doe.jpg" },
-  { name: "Jane Smith", title: "Associate Professor of Physics", imageUrl: "/path/to/jane-smith.jpg" },
-  { name: "Bob Johnson", title: "Lecturer in Mathematics", imageUrl: "/path/to/bob-johnson.jpg" },
-  { name: "Alice Brown", title: "Professor of Chemistry", imageUrl: "/path/to/alice-brown.jpg" },
-  { name: "Charlie Wilson", title: "Assistant Professor of Biology", imageUrl: "/path/to/charlie-wilson.jpg" },
-  { name: "Eva Garcia", title: "Professor of Engineering", imageUrl: "/path/to/eva-garcia.jpg" },
-  // Add more mentors as needed
-];
+interface Props {
+  mentors: Mentor[];
+  showUniversity?: boolean;
+  showBookButton?: boolean;
+  variant?: 'v1' | 'v2';
+  class?: string;
+}
+
+const { 
+  mentors = [], 
+  showUniversity = true, 
+  showBookButton = false, 
+  variant = 'v1',
+  class: className = ''
+} = Astro.props;
 ---
 
-<div class="w-full">
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-    {mentors.map((mentor, index) => (
-      <MentorCard client:load variant="v1" {...mentor} />
-    ))}
-  </div>
+<div class={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ${className}`}>
+  {mentors.length > 0 ? (
+    mentors.map((mentor) => (
+      <div class="mentor-card bg-white rounded-lg shadow-md overflow-hidden">
+        <img src={mentor.imageUrl} alt={mentor.name} class="w-full h-48 object-cover" />
+        <div class="p-4">
+          <h3 class="text-lg font-semibold">{mentor.name}</h3>
+          <p class="text-sm text-gray-600">{mentor.field}</p>
+          {showUniversity && (
+            <p class="text-sm text-gray-500">{mentor.university}</p>
+          )}
+          {showBookButton ? (
+            <a href={`/mentors/${mentor.slug}`} class="mt-2 inline-block bg-blue-500 text-white px-4 py-2 rounded-md text-sm">View Profile</a>
+          ) : (
+            <a href={`/mentors/${mentor.slug}`} class="mt-2 inline-block text-blue-500 hover:underline text-sm">Learn More</a>
+          )}
+        </div>
+      </div>
+    ))
+  ) : (
+    <p class="col-span-full text-center text-gray-500">No related mentors found.</p>
+  )}
 </div>

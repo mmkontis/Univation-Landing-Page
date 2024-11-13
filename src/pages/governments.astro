@@ -1,0 +1,114 @@
+---
+import UnivationFooter from "@/components/layout/univation-footer.astro";
+import UnivationHeader from "@/components/layout/univation-header.astro";
+import UnivationHero from "@/components/layout/univation-hero.astro";
+import UnivationCaseStudies from "@/components/sections/univation-case-studies.astro";
+import UnivationServiceCards from "@/components/sections/univation-service-cards.astro";
+import UnivationCTA from "@/components/ui/univation-cta.astro";
+import UnivationLayout from "@/layouts/univation-layout.astro";
+
+// Static data for government services
+const services = [
+  {
+    title: "Digital Transformation",
+    description: "Modernize government processes and services with cutting-edge digital solutions.",
+    slug: "digital-transformation"
+  },
+  {
+    title: "Smart City Solutions",
+    description: "Implement IoT and data-driven technologies to enhance urban living and sustainability.",
+    slug: "smart-city-solutions"
+  },
+  {
+    title: "Cybersecurity Services",
+    description: "Protect government data and infrastructure with advanced cybersecurity measures.",
+    slug: "cybersecurity-services"
+  }
+];
+
+const caseStudies = [
+  {
+    title: "Digital Transformation for City of Innovation",
+    description: "Learn how we helped modernize city services, resulting in a 30% increase in citizen satisfaction.",
+    link: "/case-studies/city-of-innovation"
+  },
+  {
+    title: "AI-Powered Predictive Maintenance for State Infrastructure",
+    description: "Discover how our AI solution reduced maintenance costs by 25% and improved infrastructure reliability.",
+    link: "/case-studies/state-infrastructure"
+  }
+];
+
+---
+
+<UnivationLayout title="Government Innovation Services">
+  <div class="univation-blue-background">
+    <UnivationHeader />
+    <UnivationHero 
+      title="Empowering Government Innovation" 
+      subtitle="Transforming public sector services through technology and innovation"
+    />
+    
+    <section class="intro-section">
+      <h2>Driving Change in Government Services</h2>
+      <p>At Univation, we partner with government agencies to foster innovation, enhance efficiency, and improve citizen services through cutting-edge technology and strategic consulting.</p>
+    </section>
+
+    <UnivationServiceCards 
+      title="Our Government Services"
+      services={services}
+    />
+
+    <UnivationCaseStudies 
+      title="Success Stories"
+      caseStudies={caseStudies}
+    />
+
+    <section class="cta-section">
+      <h2>Ready to Innovate?</h2>
+      <div class="cta-container">
+        <UnivationCTA
+          title="Schedule a Consultation"
+          buttonText="Contact Us"
+          buttonLink="/contact"
+        />
+        <UnivationCTA
+          title="Explore Our Solutions"
+          buttonText="View All Services"
+          buttonLink="/governments/services"
+        />
+      </div>
+    </section>
+
+    <UnivationFooter />
+  </div>
+</UnivationLayout>
+
+<style>
+  .intro-section, .cta-section {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+
+  .cta-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .cta-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>

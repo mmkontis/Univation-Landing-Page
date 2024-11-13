@@ -1,3 +1,437 @@
+---
+import UnivationLayout from "@/layouts/univation-layout.astro";
+import UnivationHeader from "@/components/layout/univation-header.astro";
+import UnivationFooter from "@/components/layout/univation-footer.astro";
+import MentorCards from "@/components/sections/mentor-cards.astro";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import CTAEmail from "@/components/sections/cta-email.astro";
+import YouTubePlayer from "@/components/YouTubePlayer.astro";
 
+// Simulated event data (replace with actual data in a real scenario)
+const event = {
+  title: "AI in Education: Transforming Learning Experiences",
+  date: "2023-09-15",
+  time: "14:00 - 16:00 GMT",
+  location: "Online",
+  description: "Join us for an insightful webinar on the impact of AI in education. Learn how artificial intelligence is revolutionizing teaching methods and enhancing student experiences.",
+  youtubeId: "dQw4w9WgXcQ", // Replace with an actual YouTube video ID
+  speakers: [
+    { name: "Dr. Jane Smith", title: "AI Research Scientist", imageUrl: "/path/to/jane-smith.jpg" },
+    { name: "Prof. John Doe", title: "Education Technology Expert", imageUrl: "/path/to/john-doe.jpg" },
+  ],
+  isRegistrationOpen: true, // or false, depending on the event status
+  speeches: [
+    { title: "AI in Education: Transforming Learning Experiences", year: 2023, youtubeId: "Q_0-1f-40sM", description: "Join us for an insightful webinar on the impact of AI in education. Learn how artificial intelligence is revolutionizing teaching methods and enhancing student experiences." },
+  ],
+};
 
+// Add transcript data
+const transcript = {
+  title: "AI in Education: Transforming Learning Experiences",
+  subtitles: [
+    { time: "00:00", text: "Introduction" },
+    { time: "05:30", text: "The Impact of AI on Teaching Methods" },
+    { time: "15:45", text: "Enhancing Student Experiences with AI" },
+    // ... more subtitles ...
+  ],
+  content: "Full transcript text goes here...",
+};
 
+// Simulated related events
+const relatedEvents = [
+  { title: "Machine Learning for Educators", date: "2023-10-01", slug: "machine-learning-for-educators", youtubeId: "Q_0-1f-40sM" },
+  { title: "The Future of Online Learning", date: "2023-10-15", slug: "future-of-online-learning", youtubeId: "Q_0-1f-40sM" },
+  { title: "Data Analytics in Higher Education", date: "2023-11-01", slug: "data-analytics-higher-education", youtubeId: "Q_0-1f-40sM" },
+];
+---
+
+<UnivationLayout title={`${event.title} - Univation Event`}>
+  <div class="univation-blue-background overlay">
+    <UnivationHeader />
+    
+    <main class="container mx-auto px-4">
+      <div class="hero-container relative">
+        <div class="hero" style="padding-top: 56.25%;">
+          <div class="hero-overlay"></div>
+          <div class="youtube-player-wrapper">
+            {event.speeches && event.speeches.length > 0 ? (
+              <YouTubePlayer videos={event.speeches} client:load />
+            ) : (
+              <div class="flex items-center justify-center h-full">
+                <p class="text-white text-xl">No video available</p>
+              </div>
+            )}
+          </div>
+          <button class="back-button" id="back-to-events">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+            </svg>
+            Back
+          </button>
+        </div>
+      </div>
+      
+      <div class="flex flex-col md:flex-row gap-8 mt-8">
+        <div class="md:w-3/4">
+          <div class="content-wrapper">
+            <div class="event-info mb-4">
+              <h1 class="text-2xl md:text-3xl font-bold text-gray-800">{event.title}</h1>
+              <p class="text-lg md:text-xl text-gray-600">{event.date} | {event.time} | {event.location}</p>
+            </div>
+            
+            <div class="flex items-center justify-between mb-6">
+              <div class="flex items-center space-x-4">
+                <Button variant="primary" size="sm" class="flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                  </svg>
+                  Book Mentor
+                </Button>
+                <div class="tag-white inline-flex items-center justify-center space-x-2 px-4 py-2 rounded-full border border-gray-200">
+                  <img src="/path/to/university-logo.png" alt="University Logo" class="w-6 h-6 object-contain" />
+                  <span class="text-sm font-semibold text-gray-800">University Name</span>
+                </div>
+              </div>
+              <div class="flex items-center space-x-4">
+                <div class="tag-black inline-flex items-center justify-center space-x-2 px-4 py-2 rounded-full">
+                  <span class="stat-value font-bold">{event.speakers.length}</span>
+                  <span class="stat-label text-sm">Speakers</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                  </svg>
+                </div>
+                <button class="btn-primary flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+                  </svg>
+                  Register Now
+                </button>
+              </div>
+            </div>
+
+            <div class="mt-8">
+              <div class="flex border-b border-gray-200">
+                <button id="descriptionTab" class="tab-button active">Description</button>
+                <button id="transcriptTab" class="tab-button">Transcript</button>
+              </div>
+              <div id="descriptionContent" class="tab-content">
+                <p class="text-gray-700">{event.description}</p>
+              </div>
+              <div id="transcriptContent" class="tab-content hidden">
+                <h2 class="text-2xl font-semibold mb-4">{transcript.title}</h2>
+                <div class="mb-4">
+                  {transcript.subtitles.map((subtitle) => (
+                    <p class="text-sm text-gray-600 mb-1">
+                      <span class="font-semibold">{subtitle.time}</span> - {subtitle.text}
+                    </p>
+                  ))}
+                </div>
+                <p class="text-gray-700 mb-4">{transcript.content}</p>
+                <div class="flex space-x-4">
+                  <Button variant="outline">Use this video</Button>
+                  <Button variant="outline">Quote it</Button>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-16">
+              <h2 class="text-2xl font-semibold mb-8">Event Speakers</h2>
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {event.speakers && event.speakers.length > 0 ? (
+                  event.speakers.map((speaker) => (
+                    <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                      <img src={speaker.imageUrl} alt={speaker.name} class="w-24 h-24 rounded-full mx-auto mb-4 object-cover" />
+                      <h3 class="text-lg font-semibold">{speaker.name}</h3>
+                      <p class="text-gray-600 mb-4">{speaker.title}</p>
+                      <Button variant="outline" size="sm">Book Mentor</Button>
+                    </div>
+                  ))
+                ) : (
+                  <p>No speakers available for this event.</p>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="md:w-1/4">
+          <div class="content-wrapper">
+            <h2 class="text-2xl font-semibold mb-8">Related Events</h2>
+            <div class="grid grid-cols-1 gap-4 mb-6">
+              {relatedEvents && relatedEvents.length > 0 ? (
+                relatedEvents.map((relatedEvent, index) => (
+                  <div
+                    class={`speech-card cursor-pointer transition-all duration-300 ${index === 0 ? 'active' : ''}`}
+                    data-index={index}
+                  >
+                    <div class="relative rounded-lg overflow-hidden">
+                      <img
+                        src={`https://img.youtube.com/vi/${relatedEvent.youtubeId}/mqdefault.jpg`}
+                        alt={`Thumbnail for ${relatedEvent.title}`}
+                        class="w-full h-32 object-cover rounded-lg"
+                      />
+                    </div>
+                    <h3 class="text-sm font-semibold mt-2 line-clamp-2">{relatedEvent.title}</h3>
+                    <p class="text-xs text-gray-600 mt-1">{relatedEvent.date}</p>
+                  </div>
+                ))
+              ) : (
+                <p>No related events available.</p>
+              )}
+            </div>
+            <div id="active-event-info" class="bg-[#f5f5f5] rounded-lg p-6 shadow-sm">
+              <h3 class="text-xl font-bold mb-3 text-gray-800">{relatedEvents && relatedEvents.length > 0 ? relatedEvents[0].title : 'No event selected'}</h3>
+              <p class="text-base text-gray-600 leading-relaxed">Click on an event to view more details.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <UnivationFooter />
+  </div>
+</UnivationLayout>
+
+<script>
+  document.getElementById('back-to-events').addEventListener('click', function(e) {
+    e.preventDefault();
+    const scrollPosition = window.scrollY;
+    sessionStorage.setItem('eventsScrollPosition', scrollPosition);
+    window.location.href = '/events';
+  });
+
+  // Update this script for improved tab functionality
+  const descriptionTab = document.getElementById('descriptionTab');
+  const transcriptTab = document.getElementById('transcriptTab');
+  const descriptionContent = document.getElementById('descriptionContent');
+  const transcriptContent = document.getElementById('transcriptContent');
+
+  function setActiveTab(activeTab, activeContent, inactiveTab, inactiveContent) {
+    activeTab.classList.add('active');
+    inactiveTab.classList.remove('active');
+    activeContent.classList.remove('hidden');
+    inactiveContent.classList.add('hidden');
+  }
+
+  descriptionTab.addEventListener('click', () => {
+    setActiveTab(descriptionTab, descriptionContent, transcriptTab, transcriptContent);
+  });
+
+  transcriptTab.addEventListener('click', () => {
+    setActiveTab(transcriptTab, transcriptContent, descriptionTab, descriptionContent);
+  });
+
+  // Add this script for related events functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const speechCards = document.querySelectorAll('.speech-card');
+    const activeEventInfo = document.querySelector('#active-event-info');
+    const relatedEvents = [
+      { title: "Machine Learning for Educators", date: "2023-10-01", slug: "machine-learning-for-educators", youtubeId: "Q_0-1f-40sM" },
+      { title: "The Future of Online Learning", date: "2023-10-15", slug: "future-of-online-learning", youtubeId: "Q_0-1f-40sM" },
+      { title: "Data Analytics in Higher Education", date: "2023-11-01", slug: "data-analytics-higher-education", youtubeId: "Q_0-1f-40sM" },
+    ];
+
+    function updateActiveCard(index) {
+      speechCards.forEach((card, i) => {
+        if (i === index) {
+          card.classList.add('active');
+        } else {
+          card.classList.remove('active');
+        }
+      });
+
+      // Update active event info
+      if (activeEventInfo && relatedEvents && relatedEvents[index]) {
+        const activeEvent = relatedEvents[index];
+        activeEventInfo.innerHTML = `
+          <h3 class="text-xl font-bold mb-3 text-gray-800">${activeEvent.title}</h3>
+          <p class="text-base text-gray-600 leading-relaxed">Event Date: ${activeEvent.date}</p>
+          <a href="/events/${activeEvent.slug}" class="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300">View Event</a>
+        `;
+      }
+    }
+
+    speechCards.forEach((card, index) => {
+      card.addEventListener('click', () => {
+        updateActiveCard(index);
+      });
+    });
+
+    // Set the first event as active initially
+    if (speechCards.length > 0) {
+      updateActiveCard(0);
+    }
+  });
+</script>
+
+<style>
+  /* Include all the styles from the university page */
+  .univation-blue-background {
+    background-color: #0077b6;
+    min-height: 100vh;
+    padding-bottom: 2rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .hero-container {
+    margin-bottom: 20px;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+    position: relative;
+  }
+
+  .hero {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
+    z-index: 1;
+  }
+
+  .youtube-player-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+
+  .content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 10;
+  }
+
+  .content-wrapper.no-padding {
+    max-width: 1200px;
+    padding: 0;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 10;
+  }
+
+  .overlay {
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
+  }
+
+  .back-button {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+    z-index: 3;
+    backdrop-filter: blur(10px);
+  }
+
+  .back-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  .event-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .card-white {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .tag-black {
+    background-color: black;
+    color: white;
+  }
+
+  .tag-white {
+    background-color: white;
+    color: #333;
+  }
+
+  .btn-primary {
+    @apply bg-black text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-800 transition duration-300;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300 transition duration-300;
+  }
+
+  /* Add these styles for the improved tabs */
+  .tab-button {
+    @apply px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300;
+  }
+
+  .tab-button.active {
+    @apply border-b-2 border-blue-500 text-blue-600;
+  }
+
+  .tab-content {
+    @apply py-4;
+  }
+
+  /* Add these styles for the YouTube player container */
+  #youtube-player-container {
+    margin-bottom: 2rem;
+  }
+
+  #active-speech-info {
+    transition: all 0.3s ease;
+  }
+
+  .speech-card {
+    transition: transform 0.3s ease;
+  }
+
+  .speech-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .speech-card.active .relative {
+    outline: 4px solid #3b82f6;
+  }
+
+  #active-event-info {
+    transition: all 0.3s ease;
+  }
+</style>

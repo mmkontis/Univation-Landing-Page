@@ -223,7 +223,7 @@
 }
 
 .black-content .brix---footer-link,
-.black-content .text-footer. {
+.black-content .text-footer {
   color: black;
 }
 
@@ -330,7 +330,7 @@
   font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-weight: 500;
   height: auto;
-  background-color: #fffff30;
+  background-color: rgba(255, 255, 255, 0.19);
 }
 
 .tag-trans-white:hover {
@@ -382,4 +382,94 @@
   border-color: #fff0 #fff #fff #fff0;
   border-bottom-style: solid;
   border-right-style: solid;
+}
+.shimmer-button {
+  background: radial-gradient(ellipse 80% 50% at 50% 120%, rgba(62, 61, 117), rgba(18, 18, 38));
+
+  --shimmer-color: #ffffff;
+  --shimmer-size: 90deg;
+  --shimmer-speed: 1.5s;
+  border-radius: 100px;
+  position: relative;
+  overflow: hidden;
+  padding: 16px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+  background: radial-gradient(ellipse 80% 50% at 50% 120%, rgba(62, 61, 117), rgba(18, 18, 38));
+
+}
+
+.shimmer-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px 8px rgba(62, 61, 117, 0.7);
+}
+
+.shimmer-wrapper {  background: radial-gradient(ellipse 80% 50% at 50% 120%, rgba(62, 61, 117), rgba(18, 18, 38));
+
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+.shimmer-animation {
+  background: radial-gradient(ellipse 80% 50% at 50% 120%, rgba(62, 61, 117), rgba(18, 18, 38));
+
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  aspect-ratio: 1;
+  animation: shimmer-slide var(--shimmer-speed) ease-in-out infinite;
+}
+
+.shimmer-effect {
+  background: radial-gradient(ellipse 80% 50% at 50% 120%, rgba(62, 61, 117), rgba(18, 18, 38));
+
+  position: absolute;
+  inset: -100%;
+  width: auto;
+  background: conic-gradient(
+    from calc(270deg - (var(--shimmer-size) * 0.5)),
+    transparent 0,
+    var(--shimmer-color) var(--shimmer-size),
+    transparent var(--shimmer-size)
+  );
+  animation: shimmer-spin var(--shimmer-speed) linear infinite;
+}
+
+.shimmer-mask {
+  background: radial-gradient(ellipse 80% 50% at 50% 120%, rgba(62, 61, 117), rgba(18, 18, 38));
+
+  position: absolute;
+  inset: 0.1em;
+  background: inherit;
+  border-radius: inherit;
+}
+
+.shimmer-text {
+  position: relative;
+  z-index: 10;
+  background: linear-gradient(to bottom, white 30%, rgba(255, 255, 255, 0.7));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes shimmer-slide {
+  to { transform: translate(100%, 0); }
+}
+
+@keyframes shimmer-spin {
+  to { transform: rotate(1turn); }
+}
+
+.content-wrapper {
+  background-color: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
